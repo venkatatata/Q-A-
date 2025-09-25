@@ -36,18 +36,20 @@ Async Await
 
 Async stands for asynchronous and can be seen as a method attribute, making it clear that a method performs asynchronous work. An example of such a method looks as follows:
 
-func fetchImages() async throws -> [UIImage] {
-    // .. perform data request
-}
+            func fetchImages() async throws -> [UIImage] {
+                // .. perform data request
+            }
 
 
+
+      
 “Await is awaiting a callback from his buddy async”
 
-do {
-    let images = try await fetchImages()
-    print("Fetched \(images.count) images.")
-} catch {
-    print("Fetching images failed with error \(error)")
-}
 
+        do {
+            let images = try await fetchImages()
+            print("Fetched \(images.count) images.")
+        } catch {
+            print("Fetching images failed with error \(error)")
+        }
 
