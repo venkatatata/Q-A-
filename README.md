@@ -53,3 +53,36 @@ Async stands for asynchronous and can be seen as a method attribute, making it c
             print("Fetching images failed with error \(error)")
         }
 
+**Retain count**
+
+
+In Swift, "retain count" is a concept central to Automatic Reference Counting (ARC), Swift's memory management system for reference types (classes).
+Here's how it works:
+What it is: Every instance of a class in Swift maintains an internal "retain count." This count represents the number of "strong references" pointing to that instance.
+How it changes:
+When a new instance of a class is created, its retain count starts at 1.
+When a strong reference to an instance is created (e.g., assigning it to a new variable or property), its retain count increases.
+When a strong reference to an instance is removed (e.g., a variable goes out of scope, or is set to nil), its retain count decreases.
+Deallocation: When an instance's retain count drops to zero, it means there are no more strong references holding onto it. At this point, ARC automatically deallocates the instance, freeing up the memory it occupied. The deinit() method of the class is called just before deallocation.
+Retain Cycles: A critical issue related to retain counts is a "retain cycle." This occurs when two or more objects hold strong references to each other, creating a closed loop. In such a scenario, even if external references to these objects are removed, their retain counts will never reach zero because they are still strongly referencing each other. This prevents ARC from deallocating them, leading to a memory leak. 
+Preventing Retain Cycles: To break retain cycles, you can use "weak" or "unowned" references instead of strong references in specific situations, particularly in closures or delegate patterns where a potential cycle might exist.
+Weak references: Do not increase the retain count and are automatically set to nil when the referenced object is deallocated. They are optional (weak var).
+Unowned references: Do not increase the retain count and are assumed to always refer to an object that is still in memory. They are non-optional (unowned var) and should only be used when you are certain the referenced object will not be deallocated before the unowned reference.
+
+
+
+**View Controller Life cycle**
+            First, let’s figure out which order works ViewController and after that dive deeper into each function.
+
+            init()
+            loadView()
+            viewDidLoad()
+            viewWillAppear()
+            viewIsAppearing()
+            viewWillLayoutSubviews()
+            viewDidLayoutSubviews()
+            viewDidAppear()
+            viewWillTransition()
+            viewWillDisappear()
+            viewDidDisappear()
+            deinit()
